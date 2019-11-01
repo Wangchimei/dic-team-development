@@ -35,9 +35,9 @@ class AssignsController < ApplicationController
       'メンバーを削除しました。'
     else
       'なんらかの原因で、削除できませんでした。'
-    end    
-  end  
-  
+    end
+  end
+
   def email_reliable?(address)
     address.match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
   end
