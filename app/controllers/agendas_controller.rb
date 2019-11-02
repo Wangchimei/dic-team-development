@@ -24,7 +24,10 @@ class AgendasController < ApplicationController
 
   def destroy
     @agenda.destroy
-    redirect_to dashboard_path
+    redirect_to dashboard_path, notice: 'アジェンダを削除しました！'
+    @agenda.team.members.each do |member|
+      AgendaMailer.agenda_deletion_mail(@agenda.title, member.email).deliver
+    end
   end
 
   private
