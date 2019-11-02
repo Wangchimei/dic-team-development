@@ -36,9 +36,11 @@
                 <span class=""><%= agenda.title %></span>
                 <i class="right fa fa-angle-left"></i>
               </p>
-              <object>
-                <%= link_to '', agenda_path(agenda), method: :delete, data: { confirm: 'アジェンダを削除しますか？' }, class:"fa fa-trash ml-2"%>
-              </object>
+              <% if current_user.id == agenda.team.owner_id || current_user.id == agenda.user.id %>
+                <object>
+                  <%= link_to '', agenda_path(agenda), method: :delete, data: { confirm: 'アジェンダを削除しますか？' }, class:"fa fa-trash ml-2"%>
+                </object>
+              <% end %>
             </a>
             <ul class="nav nav-treeview" style="display: block;">
               <% agenda.articles.each do |article| %>
