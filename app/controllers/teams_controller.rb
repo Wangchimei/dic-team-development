@@ -53,11 +53,10 @@ class TeamsController < ApplicationController
   end
 
   def owner_change
-    @user = User.find(params[:user_id])
-    # @team.update(team_params[owner_id: @user.id])
-    @team.update(owner_id: @user.id)
+    @team_owner = User.find(params[:user_id])
+    @team.update(owner_id: @team_owner.id)
     redirect_to request.referer, notice: '権限を移転しました'
-    FeedMailer.feed_mail(@team).deliver
+    TeamMailer.ownership_transfer_mail(@team, @team_owner.email).deliver
   end
 
   private
